@@ -1,6 +1,16 @@
 version: '2'
 services:
-  app:   
+  nginx:   
     build: .
     ports:
      - "80:80"
+    volumes:
+     - assets_volume:/app/public 
+  app:
+    image: juanlb/rails-multibase:sqlite3
+    environment:
+      - RAILS_ENV=production
+    volumes:
+     - assets_volume:/app/public 
+volumes:
+  assets_volume:
